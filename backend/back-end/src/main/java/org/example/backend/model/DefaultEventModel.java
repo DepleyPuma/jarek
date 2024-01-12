@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class DefaultEventModel {
+    private long id;
     private String name;
     private LocalDateTime dateTime;
     private String place;

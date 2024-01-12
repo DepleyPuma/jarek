@@ -13,8 +13,8 @@ import java.util.Optional;
 public class EventService {
     public EventRepository eventRepository;
     public Event addEvent(Event event){
-        eventRepository.save(event);
-        return event;
+        Event dbEvent=eventRepository.save(event);
+        return dbEvent;
     }
     public List<Event> getEvents(){
         List<Event> events=eventRepository.findAll();

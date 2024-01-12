@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +30,7 @@ public class EventController {
         List<DefaultEventModel> models=new LinkedList<>();
         for (Event event : events) {
             models.add(DefaultEventModel.builder()
+                            .id(event.getId())
                     .place(event.getPlace())
                     .name(event.getName()
                             )
@@ -52,26 +56,37 @@ public class EventController {
         return new ResponseEntity<>(model,HttpStatus.OK);
     }
 
-    @PostMapping("/addEvent")
-    public Event addEvent(@RequestBody EventRequestModel request){
+    @PostMapping("/add-event")
+    public DefaultEventModel addEvent(@RequestBody EventRequestModel request){
         System.out.println(request);
         List<Performer> performers=new LinkedList<>();
 
+//        DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm");
+//        LocalDateTime dateTime=LocalDateTime.parse("2018-06-12T19:30",formatter);
+        LocalDateTime dateTime=request.getDateTime();
         Event event=Event.builder()
                 .name(request.getName())
                 .description(request.getDescription())
                 .place(request.getPlace())
-                .dateTime(request.getDateTime())
                 .image(null)
+                .dateTime(dateTime)
                 .build();
 
         for(int i=0;i<request.getPerformers().size();i++){
             performers.add(Performer.builder()
-                    .name(request.getPerformers().get(i)).build());
+                    .name(request.getPerformers().get(i))
+                    .event(event).build());
         }
         event.setPerformers(performers);
-        eventService.addEvent(event);
-
-        return null;
+        Event event1=eventService.addEvent(event);
+        DefaultEventModel model=DefaultEventModel.builder()
+                .id(event1.getId())
+                .place(event1.getPlace())
+                .name(event1.getName()
+                )
+                .image(event1.getImage())
+                .dateTime(event1.getDateTime())
+                .build();
+        return model;
     }
 }
