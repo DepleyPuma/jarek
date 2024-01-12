@@ -1,6 +1,12 @@
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+const links = {
+	home: '#',
+	aboutUs: '#about-us',
+	events: '#events',
+};
+
 export function Nav({ navIsOpen, onClick }) {
 	console.log(navIsOpen);
 
@@ -8,7 +14,7 @@ export function Nav({ navIsOpen, onClick }) {
 		<nav className='fixed w-full z-50'>
 			{!navIsOpen && (
 				<div className='container flex justify-between items-center px-8 py-4 mt-5 rounded-full backdrop-blur-md border border-zinc-400 text-white'>
-					<a href='#' className='font-bold'>
+					<a href={links.home} className='font-bold'>
 						MusicForum
 					</a>
 
@@ -16,19 +22,13 @@ export function Nav({ navIsOpen, onClick }) {
 
 					<ul className='desktop-nav hidden gap-6 text-lg md:flex'>
 						<li>
-							<a href='#' className='hover:text-white transition-colors duration-300'>
-								Home
-							</a>
+							<a href={links.home}>Home</a>
 						</li>
 						<li>
-							<a href='#' className='hover:text-white transition-colors duration-300'>
-								O nas
-							</a>
+							<a href={links.aboutUs}>O nas</a>
 						</li>
 						<li>
-							<a href='#' className='hover:text-white transition-colors duration-300'>
-								Wydarzenia
-							</a>
+							<a href={links.events}>Wydarzenia</a>
 						</li>
 					</ul>
 				</div>
@@ -38,13 +38,19 @@ export function Nav({ navIsOpen, onClick }) {
 				<div className='absolute w-full top-0 z-40 text-white'>
 					<ul className='mobile-nav flex flex-col justify-center items-center gap-20 h-screen text-3xl md:hidden backdrop-blur-md uppercase'>
 						<li>
-							<a href='#'>Home</a>
+							<a href={links.home} onClick={onClick}>
+								Home
+							</a>
 						</li>
 						<li>
-							<a href='#'>O nas</a>
+							<a href={links.aboutUs} onClick={onClick}>
+								O nas
+							</a>
 						</li>
 						<li>
-							<a href='#'>Wydarzenia</a>
+							<a href={links.events} onClick={onClick}>
+								Wydarzenia
+							</a>
 						</li>
 					</ul>
 					<FontAwesomeIcon
