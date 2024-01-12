@@ -5,13 +5,11 @@ import org.example.backend.entity.Event;
 import org.example.backend.entity.Performer;
 import org.example.backend.model.DefaultEventModel;
 import org.example.backend.model.EventInfoModel;
+import org.example.backend.model.EventRequestModel;
 import org.example.backend.service.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
+@CrossOrigin
 public class EventController {
     private EventService eventService;
     @GetMapping("/events")
@@ -38,7 +37,7 @@ public class EventController {
         return new ResponseEntity<>(models, HttpStatus.OK);
     }
 
-    @GetMapping("event/{id}")
+    @GetMapping("/event/{id}")
     public ResponseEntity<EventInfoModel> getEventInfo(@PathVariable long id){
         Optional<Event> optionalEvent=eventService.getEventById(id);
         if(optionalEvent.isEmpty())
@@ -51,5 +50,28 @@ public class EventController {
                 .description(optionalEvent.get().getDescription())
                 .performers(performers).build();
         return new ResponseEntity<>(model,HttpStatus.OK);
+    }
+
+    @PostMapping("/addEvent")
+    public Event addEvent(@RequestBody EventRequestModel request){
+        System.out.println(request);
+        List<Performer> performers=new LinkedList<>();
+
+        Event event=Event.builder()
+                .name(request.getName())
+                .description(request.getDescription())
+                .place(request.getPlace())
+                .dateTime(request.getDateTime())
+                .image(null)
+                .build();
+
+        for(int i=0;i<request.getPerformers().size();i++){
+            performers.add(Performer.builder()
+                    .name(request.getPerformers().get(i)).build());
+        }
+        event.setPerformers(performers);
+        eventService.addEvent(event);
+
+        return null;
     }
 }
