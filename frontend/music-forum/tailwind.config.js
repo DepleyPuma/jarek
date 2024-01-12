@@ -11,7 +11,7 @@ export default {
 				margin: '2rem',
 			},
 			colors: {
-				violet: '#0d071c',
+				violet: '#090414',
 			},
 		},
 	},
