@@ -1,13 +1,7 @@
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const links = {
-	home: '#',
-	aboutUs: '#about-us',
-	events: '#events',
-};
-
-export function Nav({ navIsOpen, onClick }) {
+export function Nav({ navIsOpen, onClick, links }) {
 	console.log(navIsOpen);
 
 	return (
