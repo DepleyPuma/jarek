@@ -2,8 +2,6 @@ package org.example.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,6 +21,7 @@ public class Event {
     private List<Performer> performers;
     private LocalDateTime dateTime;
     @Lob
+    @Column(length = 10485760)
     private byte[] image;
     private String place;
 }

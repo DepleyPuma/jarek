@@ -5,15 +5,13 @@ import org.example.backend.entity.Event;
 import org.example.backend.entity.Performer;
 import org.example.backend.model.DefaultEventModel;
 import org.example.backend.model.EventInfoModel;
-import org.example.backend.model.EventRequestModel;
 import org.example.backend.service.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.text.SimpleDateFormat;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -32,8 +30,7 @@ public class EventController {
             models.add(DefaultEventModel.builder()
                             .id(event.getId())
                     .place(event.getPlace())
-                    .name(event.getName()
-                            )
+                    .name(event.getName())
                     .image(event.getImage())
                     .dateTime(event.getDateTime())
                     .build());
@@ -57,24 +54,19 @@ public class EventController {
     }
 
     @PostMapping("/add-event")
-    public DefaultEventModel addEvent(@RequestBody EventRequestModel request){
-        System.out.println(request);
+    public DefaultEventModel addEvent(@RequestParam MultipartFile image,@RequestParam String name,@RequestParam String description,@RequestParam("dateTime") LocalDateTime dateTime,@RequestParam String place,@RequestParam("performers") List<String> performersStr) throws IOException {
         List<Performer> performers=new LinkedList<>();
-
-//        DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm");
-//        LocalDateTime dateTime=LocalDateTime.parse("2018-06-12T19:30",formatter);
-        LocalDateTime dateTime=request.getDateTime();
         Event event=Event.builder()
-                .name(request.getName())
-                .description(request.getDescription())
-                .place(request.getPlace())
-                .image(null)
+                .name(name)
+                .description(description)
+                .place(place)
+                .image(image.getBytes())
                 .dateTime(dateTime)
                 .build();
 
-        for(int i=0;i<request.getPerformers().size();i++){
+        for (String s : performersStr) {
             performers.add(Performer.builder()
-                    .name(request.getPerformers().get(i))
+                    .name(s)
                     .event(event).build());
         }
         event.setPerformers(performers);
