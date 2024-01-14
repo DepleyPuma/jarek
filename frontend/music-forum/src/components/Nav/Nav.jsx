@@ -1,5 +1,6 @@
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './Nav.module.css';
 
 export function Nav({ navIsOpen, onClick, links }) {
 	console.log(navIsOpen);
@@ -16,13 +17,19 @@ export function Nav({ navIsOpen, onClick, links }) {
 
 					<ul className='desktop-nav hidden gap-6 text-lg md:flex'>
 						<li>
-							<a href={links.home}>Home</a>
+							<a href={links.home} className='p-4'>
+								Home
+							</a>
 						</li>
 						<li>
-							<a href={links.aboutUs}>O nas</a>
+							<a href={links.aboutUs} className='p-4'>
+								O nas
+							</a>
 						</li>
 						<li>
-							<a href={links.events}>Wydarzenia</a>
+							<a href={links.events} className='p-4'>
+								Wydarzenia
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -31,17 +38,17 @@ export function Nav({ navIsOpen, onClick, links }) {
 			{navIsOpen && (
 				<div className='absolute w-full top-0 z-40 text-white'>
 					<ul className='mobile-nav flex flex-col justify-center items-center gap-20 h-screen text-3xl md:hidden backdrop-blur-md uppercase'>
-						<li>
+						<li className={styles.slideLeft}>
 							<a href={links.home} onClick={onClick}>
 								Home
 							</a>
 						</li>
-						<li>
+						<li className={styles.slideLeft}>
 							<a href={links.aboutUs} onClick={onClick}>
 								O nas
 							</a>
 						</li>
-						<li>
+						<li className={styles.slideLeft}>
 							<a href={links.events} onClick={onClick}>
 								Wydarzenia
 							</a>
