@@ -10,7 +10,7 @@ export function AboutUs() {
 				<h3 className='text-4xl text-center uppercase'>Odkryj Świat Dźwięków na Naszym Wyjątkowym Forum Muzycznym!</h3>
 
 				<p className='py-10 leading-8 md:text-3xl'>
-					<span className='ml-2 p-4 text-3xl font-bold md:ml-4 md:text-6xl'>Witaj</span> w sercu muzycznej społeczności,
+					<span className='p-2 text-3xl font-bold md:ml-4 md:text-5xl'>Witaj</span> w sercu muzycznej społeczności,
 					gdzie pasjonaci dźwięków łączą się, by dzielić się swoją miłością do muzyki! Nasze forum to miejsce, w którym
 					odnajdziesz inspirujące rozmowy, ciekawe dyskusje i pełne energii wydarzenia muzyczne. Dołącz do nas już dziś
 					i uczestnicz w magicznym świecie dźwięków!
