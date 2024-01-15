@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Nav.module.css';
 
 export function Nav({ navIsOpen, onClick, links }) {
-	console.log(navIsOpen);
-
 	return (
 		<nav className='fixed w-full z-50'>
 			{!navIsOpen && (
