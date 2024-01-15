@@ -6,7 +6,7 @@ export function AboutUs() {
 		<section id='about-us' className='py-24'>
 			<SectionHeader>O nas</SectionHeader>
 
-			<div className='mx-auto items-center text-box py-24 px-8 text-white max-w-prose space-y-12'>
+			<div className='mx-auto items-center text-box pt-24 px-8 text-white max-w-prose space-y-12'>
 				<h3 className='text-4xl text-center uppercase'>Odkryj Świat Dźwięków na Naszym Wyjątkowym Forum Muzycznym!</h3>
 
 				<p className='py-10 leading-8 md:text-3xl'>
