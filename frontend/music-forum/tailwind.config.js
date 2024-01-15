@@ -12,6 +12,7 @@ export default {
 			},
 			colors: {
 				violet: '#090414',
+				coal: '#282828',
 			},
 		},
 	},
