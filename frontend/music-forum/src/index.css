@@ -5,3 +5,7 @@
 :root {
 	scroll-behavior: smooth;
 }
+
+.sticky-body {
+	overflow: hidden;
+}
