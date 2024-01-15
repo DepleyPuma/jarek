@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Header } from './components/Header/Header';
 import { Nav } from './components/Nav/Nav';
 import { AboutUs } from './components/AboutUs/AboutUs';
+import { Events } from './components/Events/Events';
 
 const links = {
 	home: '#',
@@ -14,12 +15,23 @@ function App() {
 
 	return (
 		<>
-			<Nav links={links} navIsOpen={navIsOpen} onClick={() => setNavIsOpen(prevState => !prevState)} />
+			<Nav
+				links={links}
+				navIsOpen={navIsOpen}
+				onClick={() => {
+					if (document.body.classList.contains('sticky-body')) {
+						document.body.classList.remove('sticky-body');
+					} else {
+						document.body.classList.add('sticky-body');
+					}
+					setNavIsOpen(prevState => !prevState);
+				}}
+			/>
 			<Header links={links} navIsOpen={navIsOpen} />
 			<main>
 				<AboutUs />
+				<Events />
 			</main>
-			<div className='min-h-[200svh] bg-gradient-to-r from-violet to-[#120a27]'></div>
 		</>
 	);
 }
